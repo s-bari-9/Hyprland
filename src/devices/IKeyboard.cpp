@@ -328,12 +328,6 @@ std::optional<uint32_t> IKeyboard::getLEDs() {
     return leds;
 }
 
-
-// In src/devices/IKeyboard.cpp
-void IKeyboard::updateLEDs(uint32_t leds) {
-
-}
-
 void IKeyboard::updateLEDs() {
     std::optional<uint32_t> leds = getLEDs();
 
