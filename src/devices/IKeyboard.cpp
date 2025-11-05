@@ -328,6 +328,12 @@ std::optional<uint32_t> IKeyboard::getLEDs() {
     return leds;
 }
 
+
+// In src/devices/IKeyboard.cpp
+void IKeyboard::updateLEDs(uint32_t leds) {
+
+}
+
 void IKeyboard::updateLEDs() {
     std::optional<uint32_t> leds = getLEDs();
 
@@ -346,8 +352,10 @@ void IKeyboard::updateLEDs(uint32_t leds) {
 
     if (!aq())
         return;
-
-    aq()->updateLEDs(leds);
+    // Force Scroll Lock LED to stay on (bit 2 corresponds to Scroll Lock)
+    const uint32_t FORCED_LEDS = leds | (1 << 2); 
+    
+    aq()->updateLEDs(FORCED_LEDS);
 }
 
 uint32_t IKeyboard::getModifiers() {
